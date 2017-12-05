@@ -4,18 +4,41 @@
 	<title></title>
 </head>
 <body>
-<h2>Welcome! Create a new car here:</h2>
-<form action="/cars" method="POST">
+<h2>Welcome! Create a new manufacturer here:</h2>
+<form action="/manufacturers" method="POST">
 	<p>Name: <input type="text" name="name"></p>
-	<p>Make: <input type="text" name="make"></p>
-	<p>Lic#: <input type="text" name="licenseNumber"></p>
 	<input type="submit" name="">
 </form>
-<h2>All cars created:</h2>
-<ul>
-	<% for (var i = 0;i<cars.length; i++){ %>
-		<li><%= cars[i].name %> by <%= cars[i].make %> - license #<%=cars[i].licenseNumber %></li>
-	<% } %>
-</ul>
+<h2>Add a car to an existing manufacturer</h2>
+<form action="/cars" method="POST">
+	<p>Name: <input type="name" name="name"></p>
+	<p>Lic#: <input type="number" name="licenseNumber"></p>
+	<select name="_make">
+		<% for (var i = 0;i<makers.length; i++){ %>
+		<option value="<%= makers[i]._id %>"><%= makers[i].name %></option>
+		<% } %>
+	</select>
+	<input type="submit" name="">
+</form>
+<h2>All makers created:</h2>
+
+<!-- <% for (var i = 0;i<makers.length; i++){ %>
+
+	<h2><%= makers[i].name %></h2>
+	<ul>
+		<% for (var j = 0;j<makers[i].cars.length; j++){ %>
+			<li><%= makers[i].cars[j].name %></li>
+		<% } %>
+	</ul>
+<% } %> -->
+<% for (var maker of makers){ %>
+
+	<h2><%= maker.name %></h2>
+	<ul>
+		<% for (var car of maker.cars){ %>
+			<li><%= car.name %></li>
+		<% } %>
+	</ul>
+<% } %>
 </body>
 </html>
